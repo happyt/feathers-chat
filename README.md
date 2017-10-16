@@ -1,6 +1,6 @@
 # fchat
 
-> sinple chat
+> simple chat
 
 ## About
 
@@ -43,7 +43,8 @@ $ feathers help                           # Show all commands
 ## This app
 
 https://www.youtube.com/watch?v=CuM4vLkBaik chat intro
-nom install -g yo
+
+npm install -g yo
 npm install -g generator-feathers
 mkdir fchat
 cd fchat
