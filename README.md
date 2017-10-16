@@ -1,6 +1,6 @@
 # fchat
 
-> sinple cgat
+> sinple chat
 
 ## About
 
@@ -40,18 +40,28 @@ $ feathers generate model                 # Generate a new Model
 $ feathers help                           # Show all commands
 ```
 
-## Help
+## This app
 
-For more information on all the things you can do with Feathers visit [docs.feathersjs.com](http://docs.feathersjs.com).
+https://www.youtube.com/watch?v=CuM4vLkBaik chat intro
+nom install -g yo
+npm install -g generator-feathers
+mkdir fchat
+cd fchat
+yo feathers
+=> enter details
 
-## Changelog
+yo feathers:service
+Created jabz
 
-__0.1.0__
+localhost:3030/jabz   Gives the messages
+   Can search on id=1234 or text=xxxx   
+    
+convert to socket chat
+<script src="https://unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
+<script src="/socket.io.min.js"></script>
 
-- Initial release
+Needed to add socket.io.min.js into public
 
-## License
+Added chat html
 
-Copyright (c) 2016
-
-Licensed under the [MIT license](LICENSE).
+Used mongo db, all messages written to there
