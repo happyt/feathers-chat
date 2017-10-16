@@ -44,6 +44,7 @@ $ feathers help                           # Show all commands
 
 https://www.youtube.com/watch?v=CuM4vLkBaik chat intro
 
+```
 npm install -g yo
 npm install -g generator-feathers
 mkdir fchat
@@ -52,15 +53,18 @@ yo feathers
 => enter details
 
 yo feathers:service
-Created jabz
+ => Created jabz
+```
 
 localhost:3030/jabz   Gives the messages
+
    Can search on id=1234 or text=xxxx   
     
 convert to socket chat
+```
 <script src="https://unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
 <script src="/socket.io.min.js"></script>
-
+```
 Needed to add socket.io.min.js into public
 
 Added chat html
