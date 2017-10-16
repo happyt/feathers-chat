@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box {
+            border: 3px solid rgba(0,0,1,0.6);
+            width: 100px;
+            height: 30px;
+        }
+        .flag {
+            background: blue;
+            width: 50px;
+            height: 25px;
+        }
+        
+        .wait {
+            background: orange;
+            width: 50px;
+            height: 25px;
+        }
+
+        .card {
+            box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+            max-width: 100px;
+            margin: 6px;
+            transition: .15s all ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.1);
+        }
+
+        .card a {
+            text-decoration: none;
+            padding: 6px;
+            color: #03A9F4;
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card a small {
+            font-size: 10px;
+            padding: 4px;
+        }
+        
+        .card a img {
+            height: 60px;
+        }
+
+        .wrapper {
+            display: flex;
+            max-width: 444px;
+            flex-wrap: wrap;
+            padding-top: 12px;
+        }
+
+        input {
+            padding: 4px 12px;
+            color: rgba(0,0,0,.70);
+            border: 1px solid rgba(0,0,0,.12);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{ keyword }}
+        <div v-text="onOff"></div><button @click="onOff = !onOff">TOGGLE</button>
+        <button v-on:click="alert('pressed!')">PRESS</button>
+        <div v-if="onOff">ON</div>
+        <div v-else>OFF</div>
+        <button @click="toggleOnOff()">METHOD</button>
+        <div class='box' v-bind:style="{backgroundColor: 'red'}"></div>
+        <div class='box' v-bind:style="myBoxStyle"></div>
+        <div class='box' v-bind:class="{ flag: onOff, wait: !onOff }"></div>
+        <input type="text" v-model="theColour" />{{theColour}}
+        <div class='box' v-bind:style="{backgroundColor: theColour}"></div>
+        <div class="search-wrapper">
+            <input type="text" v-model="keyword" placeholder="Search text..." />
+            <label>Search text</label>
+
+        </div>
+        <div class="wrapper">
+            <div class="card" v-for="post in filteredList">
+                <a v-bind:href="post.link" target="_blank">
+                    <img v-bind:src="post.img" alt="">
+                    <small>Posted by {{post.author}}</small>
+                    {{post.title}}
+                </a>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.2/vue.min.js"></script>
+      <script type="text/javascript">
+        class Post {
+            constructor (title, link, author, img) {
+                this.title = title;
+                this.link = link;
+                this.author = author;
+                this.img = img;
+            }
+        }
+
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                keyword: "",
+                theColour: "green",
+                onOff: true,
+                myBoxStyle: {
+                    backgroundColor: 'hotpink',
+                    width: '50px',
+                    height: '25px'
+                },
+                postList : [
+                    new Post( 'Vue.js', 'https://vuejs.org/', 'Chris', 'https://vuejs.org//images/logo.png'),
+                    new Post( 'React.js', 'https://facebook.github.io/react/', 'Tim','http://daynin.github.io/clojurescript-presentation/img/react-logo.png'),
+                    new Post(
+                        'Angular.js', 
+                        'https://angularjs.org/', 
+                        'Sam', 
+                        'https://angularjs.org/img/ng-logo.png'
+                    ),
+                    new Post(
+                        'Ember.js', 
+                        'http://emberjs.com/', 
+                        'Rachel',
+                        'http://www.gravatar.com/avatar/0cf15665a9146ba852bf042b0652780a?s=200'
+                    ),
+                    new Post(
+                        'Meteor.js', 
+                        'https://www.meteor.com/', 
+                        'Chris', 
+                        'http://hacktivist.in/introduction-to-nodejs-mongodb-meteor/img/meteor.png'
+                    ),
+                    new Post(
+                        'Aurelia', 
+                        'http://aurelia.io/', 
+                        'Tim',
+                        'https://cdn.auth0.com/blog/aurelia-logo.png'
+                    ),
+                    new Post(
+                        'Node.js', 
+                        'https://nodejs.org/en/', 
+                        'A. A. Ron',
+                        'https://code-maven.com/img/node.png'
+                    ),
+                    new Post(
+                        'Pusher', 
+                        'https://pusher.com/', 
+                        'Alex', 
+                        'https://avatars1.githubusercontent.com/u/739550?v=3&s=400'
+                    ),
+                    new Post(
+                        'Feathers.js', 
+                        'http://feathersjs.com/', 
+                        'Chuck',
+                        'https://cdn.worldvectorlogo.com/logos/feathersjs.svg'
+                    ),
+                ]
+            },
+            methods: {
+                toggleOnOff() {
+                    this.onOff = !this.onOff;
+                }
+            },
+            computed: {
+                filteredList() {
+                    return this.postList.filter((post) => {
+                        return post.title.toLowerCase().includes(this.keyword.toLowerCase());
+                    })
+                } 
+            }
+        });
+
+    </script>
+</body>
+</html>

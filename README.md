@@ -70,3 +70,10 @@ Needed to add socket.io.min.js into public
 Added chat html
 
 Used mongo db, all messages written to there
+
+===
+
+Added vue-test.html for a quick look at vue
+Will attach to feathers api ....?
+
+
