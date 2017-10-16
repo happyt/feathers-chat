@@ -1,0 +1,75 @@
+<html>
+
+<head>
+  <title>Welcome</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html,
+    body {
+      font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+      font-weight: 400;
+      font-size: 16px;
+      color: #333;
+    }
+    
+    .center-text {
+      text-align: center;
+    }
+    
+    main {
+      margin-top: 100px;
+      padding: 20px;
+    }
+    
+    h4.mine{
+      color: red;
+    }
+    
+  </style>
+</head>
+
+<body style="margin: 100px">
+  <input type="text" placeholder="Message" id="message" 
+      onkeydown="if (event.keyCode == 13) document.getElementById('btnAdd').click()">
+  <button id="btnAdd" onclick="sendMessage();">SEND</button>
+
+  <div id="messagesList"></div>
+  <script src="https://unpkg.com/feathers-client@^2.0.0/dist/feathers.js"></script>
+  <script src="/socket.io.min.js"></script>
+  <script type="text/javascript">
+      var socket=io();
+      var app = feathers();
+      app.configure(feathers.socketio(socket));
+      
+      var messages = app.service("jabz");
+      messages.on('created', function(mess) {
+        var messageList = document.getElementById("messagesList");
+        if (mess.text != "") {                 // check not empty
+          if (mess.text == document.getElementById("message").value) {
+            messagesList.innerHTML += '<h4 class="mine"> ' + mess.text + '</h4>';
+          } else {
+            messagesList.innerHTML += '<h4>' + mess.text + '</h4>';
+          }
+          message.value=""; //clear the input field
+        }
+ //       console.log("List: " + JSON.stringify(messagesList));
+        console.log("Message created: ", mess.text);
+      });
+
+      function sendMessage() {
+ //       alert("hi");
+        var myInput = document.getElementById("message").value;
+        messages.create({text: myInput});
+        
+//        messages.create({text: "Hello via web socket!"});
+      }
+    </script>
+
+</body>
+
+</html>
